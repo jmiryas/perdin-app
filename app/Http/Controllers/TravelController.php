@@ -20,7 +20,7 @@ class TravelController extends Controller
     {
         $currentRoles = auth()->user()->getRoleNames();
 
-        $travels = Travel::with(["divSDM", "pegawai", "travelStatus", "currentCity", "destinationCity", "country"])->orderBy("created_at")->get();
+        $travels = Travel::with(["travelStatus", "currentCity", "destinationCity", "country"])->orderBy("travel_status_id")->get();
 
         $filtered_travels = collect();
 
@@ -78,25 +78,45 @@ class TravelController extends Controller
 
         $distance = $this->getDistance($current_city->latitude, $current_city->longitude, $destination_city->latitude, $destination_city->longitude);
 
-        $isSameProvince = $current_city->province->name == $destination_city->province->name;
+        // Jika berasal dari negara yang sama
+        // Maka, cari provinsi dan pulaunya
+        // Selain itu buat travel ke luar negeri
 
-        $isSameIsland = $current_city->province->island->name == $destination_city->province->island->name;
+        if ($current_city->country->name == $destination_city->country->name) {
+            $isSameProvince = $current_city->province->name == $destination_city->province->name;
 
-        $allowance = $this->getAllowance($duration, $distance, $isSameProvince, $isSameIsland, true);
+            $isSameIsland = $current_city->province->island->name == $destination_city->province->island->name;
 
-        Travel::create([
-            "div_sdm_id" => $user_div_sdm->id,
-            "pegawai_id" => auth()->user()->id,
-            "current_city_id" => $current_city->id,
-            "destination_city_id" => $destination_city->id,
-            "country_id" => null,
-            "travel_status_id" => $travel_status->id,
-            "description" => $request->description,
-            "start_date" => Carbon::parse($request->start_date),
-            "end_date" => Carbon::parse($request->end_date),
-            "allowance" => $allowance,
-            "is_domestic" => true
-        ]);
+            $allowance = $this->getAllowance($duration, $distance, $isSameProvince, $isSameIsland, true);
+
+            Travel::create([
+                "div_sdm_id" => $user_div_sdm->id,
+                "pegawai_id" => auth()->user()->id,
+                "current_city_id" => $current_city->id,
+                "destination_city_id" => $destination_city->id,
+                "travel_status_id" => $travel_status->id,
+                "description" => $request->description,
+                "start_date" => Carbon::parse($request->start_date),
+                "end_date" => Carbon::parse($request->end_date),
+                "allowance" => $allowance,
+                "is_domestic" => true,
+            ]);
+        } else {
+            $allowance = $this->getAllowance($duration, $distance, false, false, false);
+
+            Travel::create([
+                "div_sdm_id" => $user_div_sdm->id,
+                "pegawai_id" => auth()->user()->id,
+                "current_city_id" => $current_city->id,
+                "destination_city_id" => $destination_city->id,
+                "travel_status_id" => $travel_status->id,
+                "description" => $request->description,
+                "start_date" => Carbon::parse($request->start_date),
+                "end_date" => Carbon::parse($request->end_date),
+                "allowance" => $allowance,
+                "is_domestic" => false,
+            ]);
+        }
 
         return redirect(route("travels.index"))->with("success", "Perjalanan dinas berhasil dibuat");
     }

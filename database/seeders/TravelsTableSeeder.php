@@ -21,41 +21,38 @@ class TravelsTableSeeder extends Seeder
             "pegawai_id" => 4,
             "current_city_id" => 189,
             "destination_city_id" => 190,
-            "country_id" => null,
             "travel_status_id" => 1,
             "description" => "Perjalanan dinas dari Banyumas ke Purbalingga",
             "start_date" => Carbon::parse("2023-06-08"),
             "end_date" => Carbon::parse("2023-06-11"),
             "allowance" => 0,
-            "is_domestic" => true
+            "is_domestic" => true,
         ]);
 
         $travel2 = Travel::create([
             "div_sdm_id" => 3,
             "pegawai_id" => 5,
             "current_city_id" => 189,
-            "destination_city_id" => null,
-            "country_id" => 196,
+            "destination_city_id" => 501,
             "travel_status_id" => 1,
-            "description" => "Perjalanan dinas dari Banyumas ke Singapura",
+            "description" => "Perjalanan dinas dari Banyumas ke Tokyo",
             "start_date" => Carbon::parse("2023-06-09"),
             "end_date" => Carbon::parse("2023-06-15"),
             "allowance" => 0,
-            "is_domestic" => false
+            "is_domestic" => false,
         ]);
 
         $travel3 = Travel::create([
             "div_sdm_id" => 3,
             "pegawai_id" => 4,
             "current_city_id" => 188,
-            "destination_city_id" => null,
-            "country_id" => 109,
+            "destination_city_id" => 503,
             "travel_status_id" => 1,
-            "description" => "Perjalanan dinas dari Cilacap ke Jepang",
+            "description" => "Perjalanan dinas dari Cilacap ke China",
             "start_date" => Carbon::parse("2023-06-12"),
             "end_date" => Carbon::parse("2023-06-20"),
             "allowance" => 0,
-            "is_domestic" => false
+            "is_domestic" => false,
         ]);
 
         $travel1->update([

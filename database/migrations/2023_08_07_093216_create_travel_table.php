@@ -19,7 +19,6 @@ return new class extends Migration
             $table->unsignedBigInteger("pegawai_id");
             $table->unsignedBigInteger("current_city_id")->nullable();
             $table->unsignedBigInteger("destination_city_id")->nullable();
-            $table->unsignedBigInteger("country_id")->nullable();
             $table->unsignedBigInteger("travel_status_id");
             $table->text("description")->nullable();
             $table->dateTime("start_date");
@@ -30,7 +29,6 @@ return new class extends Migration
             $table->foreign("pegawai_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign("current_city_id")->references("id")->on("cities")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign("destination_city_id")->references("id")->on("cities")->onDelete("cascade")->onUpdate("cascade");
-            $table->foreign("country_id")->references("id")->on("countries")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign("travel_status_id")->references("id")->on("travel_statuses")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });

@@ -26,4 +26,9 @@ class City extends Model
     {
         return $this->hasMany(Travel::class);
     }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

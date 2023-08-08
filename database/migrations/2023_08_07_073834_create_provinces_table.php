@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("alt_name");
             $table->string("latitude");
             $table->string("longitude");
-            $table->foreign("island_id")->references("id")->on("islands")->onDelete("cascade");
+            $table->foreign("island_id")->references("id")->on("islands")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }
