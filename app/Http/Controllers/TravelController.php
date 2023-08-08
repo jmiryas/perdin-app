@@ -102,6 +102,9 @@ class TravelController extends Controller
                 "is_domestic" => true,
             ]);
         } else {
+            // Tidak perlu mencari provinsi dan pulau karena 
+            // perjalanannya ke luar negeri
+
             $allowance = $this->getAllowance($duration, $distance, false, false, false);
 
             Travel::create([
