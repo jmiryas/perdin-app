@@ -1,3 +1,1 @@
-## About Laravel
-
-Belum di-migrate
+## Tentang Aplikasi
