@@ -116,7 +116,7 @@
 
     @component("components.nav-item")
     @slot("routeName")
-    ravels.index
+    travels.index
     @endslot
 
     @slot("navItemName")
