@@ -24,7 +24,7 @@ Daftar Role
                         </h6>
 
                         <div>
-                            <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-primary">Tambah Perdin</a>
+                            <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-primary">Tambah Role</a>
                         </div>
                     </div>
 
