@@ -15,8 +15,42 @@ Tambah Perdin
             <div class="card-body">
                 <h5 class="card-title">Tambah Perdin</h5>
 
-                <form method="POST" action="{{ route('travels.store') }}">
+                <form method="POST" action="{{ route('admin.travels.store') }}">
                     @csrf
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Div. SDM</label>
+                        <div class="col-sm-10">
+                            <select class="form-select div_sdm" name="div_sdm_id" style="width: 100%;">
+                                @forelse ($users_sdm as $sdm)
+                                <option value="{{ $sdm->id }}">{{ $sdm->name }}</option>
+                                @empty
+                                <option value="">-</option>
+                                @endforelse
+                            </select>
+
+                            @error("div_sdm_id")
+                            <small class="form-text text-sm text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Pegawai</label>
+                        <div class="col-sm-10">
+                            <select class="form-select pegawai_id" name="pegawai_id" style="width: 100%;">
+                                @forelse ($users_pegawai as $pegawai)
+                                <option value="{{ $pegawai->id }}">{{ $pegawai->name }}</option>
+                                @empty
+                                <option value="">-</option>
+                                @endforelse
+                            </select>
+
+                            @error("pegawai_id")
+                            <small class="form-text text-sm text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
 
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Kota Asal</label>
@@ -106,6 +140,8 @@ Tambah Perdin
 
 <script>
     $(document).ready(function() {
+        $('.pegawai_id').select2();
+        $('.div_sdm').select2();
         $('.current_city').select2();
         $('.destination_city').select2();
     });

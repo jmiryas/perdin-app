@@ -24,7 +24,8 @@ Daftar Perjalanan Dinas
                         </h6>
 
                         <div>
-                            <a href="{{ route('travels.create') }}" class="btn btn-sm btn-primary">Tambah Perdin</a>
+                            <a href="{{ route('admin.travels.create') }}" class="btn btn-sm btn-primary">Tambah
+                                Perdin</a>
                         </div>
                     </div>
 

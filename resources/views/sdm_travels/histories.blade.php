@@ -20,7 +20,7 @@ Riwayat Perjalanan Dinas
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between">
                         <h6 class="card-title">
-                            Riwayat Perjalanan Dinas
+                            Riwayat Perjalanan Dinas | <span class="small">{{ count($travels) }}</span>
                         </h6>
                     </div>
 

@@ -53,6 +53,8 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get("/users", [UserController::class, "index"])->name("users.index");
 
         Route::get("/travels", [AdminTravelController::class, "index"])->name("admin.travels.index");
+        Route::get("/travels/create", [AdminTravelController::class, "create"])->name("admin.travels.create");
+        Route::post("/travels", [AdminTravelController::class, "store"])->name("admin.travels.store");
         Route::get("/travels/{travel}", [AdminTravelController::class, "show"])->name("admin.travels.show");
         Route::post("/travels/reject", [AdminTravelController::class, "rejectTravel"])->name("admin.travels.reject");
         Route::post("/travels/accept", [AdminTravelController::class, "acceptTravel"])->name("admin.travels.accept");
