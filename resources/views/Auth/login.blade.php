@@ -61,7 +61,7 @@
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Email</label>
                       <div class="input-group has-validation">
-                        <input type="email" name="email" class="form-control" required>
+                        <input type="email" name="email" class="form-control" placeholder="Masukkan email" required>
 
                         @error("email")
                         <small class="form-text text-sm text-danger">{{ $message }}</small>
@@ -71,7 +71,8 @@
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <input type="password" name="password" class="form-control" placeholder="Masukkan password"
+                        required>
 
                       @error("password")
                       <small class="form-text text-sm text-danger">{{ $message }}</small>

@@ -1,7 +1,7 @@
 @extends("layouts.master")
 
 @section("title")
-Daftar Perjalanan Dinas
+PerdinKu
 @endsection
 
 @section("content")
@@ -20,7 +20,7 @@ Daftar Perjalanan Dinas
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between">
                         <h6 class="card-title">
-                            Daftar Perjalanan Dinas
+                            PerdinKu | <span class="small">{{ count($filtered_travels) }}</span>
                         </h6>
 
                         <div>
