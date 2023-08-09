@@ -13,50 +13,47 @@
     @role("admin")
     <li class="nav-heading">Master Data</li>
 
-    @can("read countries")
     <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('countries.index') }}">
+      <a class="nav-link collapsed" href="{{ route('admin.countries.index') }}">
         <i class="bi bi-grid"></i>
         <span>Daftar Negara</span>
       </a>
     </li>
-    @endcan
 
-    @can("read islands")
     <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('islands.index') }}">
+      <a class="nav-link collapsed" href="{{ route('admin.islands.index') }}">
         <i class="bi bi-grid"></i>
         <span>Daftar Pulau</span>
       </a>
     </li>
-    @endcan
 
-    @can("read provinces")
     <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('provinces.index') }}">
+      <a class="nav-link collapsed" href="{{ route('admin.provinces.index') }}">
         <i class="bi bi-grid"></i>
         <span>Daftar Provinsi</span>
       </a>
     </li>
-    @endcan
 
-    @can("read cities")
     <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('cities.index') }}">
+      <a class="nav-link collapsed" href="{{ route('admin.cities.index') }}">
         <i class="bi bi-grid"></i>
         <span>Daftar Kota/Kabupaten</span>
       </a>
     </li>
-    @endcan
 
-    @can("read users")
     <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('users.index') }}">
+      <a class="nav-link collapsed" href="{{ route('admin.roles.index') }}">
+        <i class="bi bi-grid"></i>
+        <span>Daftar Role</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{{ route('admin.users.index') }}">
         <i class="bi bi-grid"></i>
         <span>Pengguna</span>
       </a>
     </li>
-    @endcan
 
     <li class="nav-heading">Perjalanan Dinas</li>
 

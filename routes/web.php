@@ -6,6 +6,7 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\IslandController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SdmTravelController;
 use App\Http\Controllers\TravelController;
 use App\Http\Controllers\UserController;
@@ -26,31 +27,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
 Route::group(["middleware" => ["auth"]], function () {
     Route::get("/dashboard", function () {
         return view("dashboard.index");
     })->name("dashboard.index");
 
     Route::group(["middleware" => "role:admin", "prefix" => "admin"], function () {
-        Route::get("/countries", [CountryController::class, "index"])->name("countries.index");
+        Route::get("/countries", [CountryController::class, "index"])->name("admin.countries.index");
 
-        Route::get("/islands", [IslandController::class, "index"])->name("islands.index");
+        Route::get("/islands", [IslandController::class, "index"])->name("admin.islands.index");
 
-        Route::get("/provinces", [ProvinceController::class, "index"])->name("provinces.index");
+        Route::get("/provinces", [ProvinceController::class, "index"])->name("admin.provinces.index");
 
-        Route::get("/cities", [CityController::class, "index"])->name("cities.index");
+        Route::get("/cities", [CityController::class, "index"])->name("admin.cities.index");
 
-        Route::get("/users", [UserController::class, "index"])->name("users.index");
+        Route::get("/roles", [RoleController::class, "index"])->name("admin.roles.index");
+
+        Route::get("/users", [UserController::class, "index"])->name("admin.users.index");
 
         Route::get("/travels", [AdminTravelController::class, "index"])->name("admin.travels.index");
         Route::get("/travels/create", [AdminTravelController::class, "create"])->name("admin.travels.create");
