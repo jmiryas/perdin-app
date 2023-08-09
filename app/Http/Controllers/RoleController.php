@@ -11,8 +11,29 @@ class RoleController extends Controller
     {
         $roles = Role::orderBy("name")->get();
 
-        // dd($roles);
-
         return view("roles.index", compact("roles"));
+    }
+
+    public function create()
+    {
+        return view("roles.create");
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            "name" => "required|unique:roles,name"
+        ]);
+
+        Role::create(["name" => $request->name]);
+
+        return redirect(route("admin.roles.index"))->with("success", "Role berhasil ditambahkan");
+    }
+
+    public function destroy(Role $role)
+    {
+        $role->delete();
+
+        return redirect(route("admin.roles.index"))->with("success", "Role berhasil dihapus");
     }
 }

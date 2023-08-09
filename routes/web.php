@@ -24,13 +24,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view("landing");
+})->name("landing.index");
 
 Route::group(["middleware" => ["auth"]], function () {
+    // Dashboard ketika login
+
     Route::get("/dashboard", function () {
         return view("dashboard.index");
     })->name("dashboard.index");
+
+    // Menu Admin
 
     Route::group(["middleware" => "role:admin", "prefix" => "admin"], function () {
         Route::get("/countries", [CountryController::class, "index"])->name("admin.countries.index");
@@ -42,8 +46,16 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get("/cities", [CityController::class, "index"])->name("admin.cities.index");
 
         Route::get("/roles", [RoleController::class, "index"])->name("admin.roles.index");
+        Route::get("/roles/create", [RoleController::class, "create"])->name("admin.roles.create");
+        Route::post("/roles", [RoleController::class, "store"])->name("admin.roles.store");
+        Route::delete("/roles/{role}", [RoleController::class, "destroy"])->name("admin.roles.destroy");
 
         Route::get("/users", [UserController::class, "index"])->name("admin.users.index");
+        Route::get("/users/create", [UserController::class, "create"])->name("admin.users.create");
+        Route::get("/users/edit/{user}", [UserController::class, "edit"])->name("admin.users.edit");
+        Route::put("/users/{user}", [UserController::class, "update"])->name("admin.users.update");
+        Route::post("/users", [UserController::class, "store"])->name("admin.users.store");
+        Route::delete("/users/{user}", [UserController::class, "destroy"])->name("admin.users.destroy");
 
         Route::get("/travels", [AdminTravelController::class, "index"])->name("admin.travels.index");
         Route::get("/travels/create", [AdminTravelController::class, "create"])->name("admin.travels.create");
@@ -54,6 +66,8 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::delete("/travels/{travel}", [AdminTravelController::class, "destroy"])->name("admin.travels.destroy");
     });
 
+    // Menu SDM
+
     Route::group(["middleware" => "role:sdm", "prefix" => "sdm"], function () {
         Route::get("/travels", [SdmTravelController::class, "index"])->name("sdm.travels.index");
         Route::get("/travels/histories", [SdmTravelController::class, "travelHistories"])->name("sdm.travels.histories");
@@ -62,11 +76,17 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::post("/travels/accept", [SdmTravelController::class, "acceptTravel"])->name("sdm.travels.accept");
     });
 
+    // Menu Pegawai
+
     Route::group(["middleware" => "role:pegawai"], function () {
         Route::get("/travels", [TravelController::class, "index"])->name("travels.index");
         Route::get("/travels/create", [TravelController::class, "create"])->name("travels.create");
         Route::post("/travels", [TravelController::class, "store"])->name("travels.store");
     });
+});
+
+Route::fallback(function () {
+    return redirect(route("landing.index"));
 });
 
 require __DIR__ . '/auth.php';

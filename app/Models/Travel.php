@@ -37,11 +37,6 @@ class Travel extends Model
         return $this->belongsTo(City::class, "destination_city_id", "id");
     }
 
-    public function country()
-    {
-        return $this->belongsTo(Country::class);
-    }
-
     public function travelStatus()
     {
         return $this->belongsTo(TravelStatus::class);

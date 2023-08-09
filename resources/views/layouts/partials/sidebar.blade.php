@@ -2,67 +2,90 @@
 
   <ul class="sidebar-nav" id="sidebar-nav">
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('dashboard.index') }}"
-        style="background-color: {{ Route::current()->getName() == 'dashboard.index' ? '#227093' : '' }};">
-        <i class="bi bi-grid" style="color: {{ Route::current()->getName() == 'dashboard.index' ? 'white' : '' }};"></i>
-        <span style="color: {{ Route::current()->getName() == 'dashboard.index' ? 'white' : '' }};">Dashboard</span>
-      </a>
-    </li><!-- End Dashboard Nav -->
+    @component("components.nav-item")
+    @slot("routeName")
+    dashboard.index
+    @endslot
+
+    @slot("navItemName")
+    Dashboard
+    @endslot
+    @endcomponent
 
     @role("admin")
     <li class="nav-heading">Master Data</li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('admin.countries.index') }}">
-        <i class="bi bi-grid"></i>
-        <span>Daftar Negara</span>
-      </a>
-    </li>
+    @component("components.nav-item")
+    @slot("routeName")
+    admin.countries.index
+    @endslot
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('admin.islands.index') }}">
-        <i class="bi bi-grid"></i>
-        <span>Daftar Pulau</span>
-      </a>
-    </li>
+    @slot("navItemName")
+    Daftar Negara
+    @endslot
+    @endcomponent
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('admin.provinces.index') }}">
-        <i class="bi bi-grid"></i>
-        <span>Daftar Provinsi</span>
-      </a>
-    </li>
+    @component("components.nav-item")
+    @slot("routeName")
+    admin.islands.index
+    @endslot
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('admin.cities.index') }}">
-        <i class="bi bi-grid"></i>
-        <span>Daftar Kota/Kabupaten</span>
-      </a>
-    </li>
+    @slot("navItemName")
+    Daftar Pulau
+    @endslot
+    @endcomponent
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('admin.roles.index') }}">
-        <i class="bi bi-grid"></i>
-        <span>Daftar Role</span>
-      </a>
-    </li>
+    @component("components.nav-item")
+    @slot("routeName")
+    admin.provinces.index
+    @endslot
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('admin.users.index') }}">
-        <i class="bi bi-grid"></i>
-        <span>Pengguna</span>
-      </a>
-    </li>
+    @slot("navItemName")
+    Daftar Provinsi
+    @endslot
+    @endcomponent
+
+    @component("components.nav-item")
+    @slot("routeName")
+    admin.cities.index
+    @endslot
+
+    @slot("navItemName")
+    Daftar Kota/Kabupaten
+    @endslot
+    @endcomponent
+
+    @component("components.nav-item")
+    @slot("routeName")
+    admin.roles.index
+    @endslot
+
+    @slot("navItemName")
+    Daftar Role
+    @endslot
+    @endcomponent
+
+    @component("components.nav-item")
+    @slot("routeName")
+    admin.users.index
+    @endslot
+
+    @slot("navItemName")
+    Daftar Pengguna
+    @endslot
+    @endcomponent
 
     <li class="nav-heading">Perjalanan Dinas</li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('admin.travels.index') }}">
-        <i class="bi bi-grid"></i>
-        <span>Daftar Perdin</span>
-      </a>
-    </li>
+    @component("components.nav-item")
+    @slot("routeName")
+    admin.travels.index
+    @endslot
+
+    @slot("navItemName")
+    Daftar Perdin
+    @endslot
+    @endcomponent
     @endrole
 
     @role("sdm")
@@ -91,12 +114,15 @@
     @role("pegawai")
     <li class="nav-heading">Perjalanan Dinas</li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('travels.index') }}">
-        <i class="bi bi-grid"></i>
-        <span>PerdinKu</span>
-      </a>
-    </li>
+    @component("components.nav-item")
+    @slot("routeName")
+    ravels.index
+    @endslot
+
+    @slot("navItemName")
+    PerdinKu
+    @endslot
+    @endcomponent
     @endrole()
 
   </ul>
