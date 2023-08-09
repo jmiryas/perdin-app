@@ -56,4 +56,33 @@ class Travel extends Model
     {
         return ucwords(strtolower($title));
     }
+
+    // Menghitung jarak berdasarkan lat dan long
+    // Sumber: https://www.geodatasource.com/resources/tutorials/how-to-calculate-the-distance-between-2-locations-using-php/#:~:text=php%20function%20distance(%24lat1,(%24dist)%3B%20%24miles%20%3D%20%24
+    // Pengecekan: https://www.meridianoutpost.com/resources/etools/calculators/calculator-latitude-longitude-distance.php?
+
+    function getDistance($lat1, $lon1, $lat2, $lon2)
+    {
+        if (($lat1 == $lat2) && ($lon1 == $lon2)) {
+            return 0;
+        } else {
+            $theta = $lon1 - $lon2;
+            $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+            $dist = acos($dist);
+            $dist = rad2deg($dist);
+            $miles = $dist * 60 * 1.1515;
+
+            return ($miles * 1.609344);
+        }
+    }
+
+    public function isSameProvince($currentCity, $destinationCity)
+    {
+        return $currentCity->province->name == $destinationCity->province->name ? "Ya" : "Tidak";
+    }
+
+    public function isSameIsland($currentCity, $destinationCity)
+    {
+        return $currentCity->province->island->name == $destinationCity->province->island->name ? "Ya" : "Tidak";
+    }
 }

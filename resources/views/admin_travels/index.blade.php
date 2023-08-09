@@ -20,7 +20,7 @@ Daftar Perjalanan Dinas
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between">
                         <h6 class="card-title">
-                            Daftar Perjalanan Dinas
+                            Daftar Perjalanan Dinas | <span class="small">{{ count($travels) }}</span>
                         </h6>
 
                         <div>
@@ -32,16 +32,19 @@ Daftar Perjalanan Dinas
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">SDM</th>
+                                <th scope="col">Pegawai</th>
                                 <th scope="col">Kota</th>
-                                <th scope="col">Tanggal</th>
-                                <th scope="col">Deskripsi</th>
                                 <th scope="col">Status</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($filtered_travels as $travel)
+                            @forelse ($travels as $travel)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
+                                <th>{{ $travel->divSDM->name }}</th>
+                                <th>{{ $travel->pegawai->name }}</th>
                                 <td>
                                     <span>
                                         {{ $travel->getTitleCase($travel->currentCity->name) }}
@@ -50,25 +53,23 @@ Daftar Perjalanan Dinas
                                     </span>
                                 </td>
                                 <td>
-                                    {{ $travel->start_date->format("d M Y") }} - {{
-                                    $travel->end_date->format("d M Y")
-                                    }} ({{ $travel->travelDurationDays() }} hari)
-                                </td>
-                                <td>{{ $travel->description ?? "-" }}</td>
-                                <td>
                                     @if ($travel->travelStatus->name == "Pending")
-                                    <span class="fw-bold" style="color: #227093">{{ $travel->travelStatus->name
-                                        }}</span>
+                                    <span class="text-warning fw-bold">{{ $travel->travelStatus->name }}</span>
                                     @elseif ($travel->travelStatus->name == "Accepted")
                                     <span class="text-success fw-bold">{{ $travel->travelStatus->name }}</span>
                                     @else
                                     <span class="text-danger fw-bold">{{ $travel->travelStatus->name }}</span>
                                     @endif
                                 </td>
+                                <td>
+                                    <a href="{{ route('admin.travels.show', $travel) }}" class="btn btn-sm btn-primary">
+                                        Selengkapnya
+                                    </a>
+                                </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" class="text-center">Tidak ada perjalanan dinas apapun</td>
+                                <td>Tidak ada perjalanan dinas apapun</td>
                             </tr>
                             @endforelse
                         </tbody>

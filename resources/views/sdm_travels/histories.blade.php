@@ -1,7 +1,7 @@
 @extends("layouts.master")
 
 @section("title")
-Daftar Perjalanan Dinas
+Riwayat Perjalanan Dinas
 @endsection
 
 @section("content")
@@ -20,28 +20,27 @@ Daftar Perjalanan Dinas
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between">
                         <h6 class="card-title">
-                            Daftar Perjalanan Dinas
+                            Riwayat Perjalanan Dinas
                         </h6>
-
-                        <div>
-                            <a href="{{ route('travels.create') }}" class="btn btn-sm btn-primary">Tambah Perdin</a>
-                        </div>
                     </div>
 
                     <table class="table datatable">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">Nama</th>
                                 <th scope="col">Kota</th>
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Deskripsi</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($filtered_travels as $travel)
+                            @forelse ($travels as $travel)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $travel->pegawai->name }}</td>
                                 <td>
                                     <span>
                                         {{ $travel->getTitleCase($travel->currentCity->name) }}
@@ -57,18 +56,21 @@ Daftar Perjalanan Dinas
                                 <td>{{ $travel->description ?? "-" }}</td>
                                 <td>
                                     @if ($travel->travelStatus->name == "Pending")
-                                    <span class="fw-bold" style="color: #227093">{{ $travel->travelStatus->name
-                                        }}</span>
+                                    <span class="text-warning fw-bold">{{ $travel->travelStatus->name }}</span>
                                     @elseif ($travel->travelStatus->name == "Accepted")
                                     <span class="text-success fw-bold">{{ $travel->travelStatus->name }}</span>
                                     @else
                                     <span class="text-danger fw-bold">{{ $travel->travelStatus->name }}</span>
                                     @endif
                                 </td>
+                                <td>
+                                    <a href="{{ route('sdm.travels.show', $travel) }}"
+                                        class="btn btn-sm btn-primary">Selengkapnya</a>
+                                </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" class="text-center">Tidak ada perjalanan dinas apapun</td>
+                                <td colspan="7" class="text-center">Tidak ada perjalanan dinas apapun</td>
                             </tr>
                             @endforelse
                         </tbody>

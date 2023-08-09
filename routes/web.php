@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminTravelController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\IslandController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\SdmTravelController;
 use App\Http\Controllers\TravelController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +41,7 @@ Route::group(["middleware" => ["auth"]], function () {
         return view("dashboard.index");
     })->name("dashboard.index");
 
-    Route::group(["middleware" => "role:admin"], function () {
+    Route::group(["middleware" => "role:admin", "prefix" => "admin"], function () {
         Route::get("/countries", [CountryController::class, "index"])->name("countries.index");
 
         Route::get("/islands", [IslandController::class, "index"])->name("islands.index");
@@ -49,9 +51,23 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get("/cities", [CityController::class, "index"])->name("cities.index");
 
         Route::get("/users", [UserController::class, "index"])->name("users.index");
+
+        Route::get("/travels", [AdminTravelController::class, "index"])->name("admin.travels.index");
+        Route::get("/travels/{travel}", [AdminTravelController::class, "show"])->name("admin.travels.show");
+        Route::post("/travels/reject", [AdminTravelController::class, "rejectTravel"])->name("admin.travels.reject");
+        Route::post("/travels/accept", [AdminTravelController::class, "acceptTravel"])->name("admin.travels.accept");
+        Route::delete("/travels/{travel}", [AdminTravelController::class, "destroy"])->name("admin.travels.destroy");
     });
 
-    Route::group(["middleware" => "role:admin|sdm|pegawai"], function () {
+    Route::group(["middleware" => "role:sdm", "prefix" => "sdm"], function () {
+        Route::get("/travels", [SdmTravelController::class, "index"])->name("sdm.travels.index");
+        Route::get("/travels/histories", [SdmTravelController::class, "travelHistories"])->name("sdm.travels.histories");
+        Route::get("/travels/{travel}", [SdmTravelController::class, "show"])->name("sdm.travels.show");
+        Route::post("/travels/reject", [SdmTravelController::class, "rejectTravel"])->name("sdm.travels.reject");
+        Route::post("/travels/accept", [SdmTravelController::class, "acceptTravel"])->name("sdm.travels.accept");
+    });
+
+    Route::group(["middleware" => "role:pegawai"], function () {
         Route::get("/travels", [TravelController::class, "index"])->name("travels.index");
         Route::get("/travels/create", [TravelController::class, "create"])->name("travels.create");
         Route::post("/travels", [TravelController::class, "store"])->name("travels.store");

@@ -18,25 +18,11 @@ class TravelController extends Controller
      */
     public function index()
     {
-        $currentRoles = auth()->user()->getRoleNames();
+        $travels = Travel::where("pegawai_id", auth()->user()->id)
+            ->with(["travelStatus", "currentCity", "destinationCity"])
+            ->orderBy("travel_status_id")->get();
 
-        $travels = Travel::with(["travelStatus", "currentCity", "destinationCity", "country"])->orderBy("travel_status_id")->get();
-
-        $filtered_travels = collect();
-
-        if (empty(array_diff($currentRoles->toArray(), ["admin"]))) {
-            $filtered_travels = $travels;
-        } else if (empty(array_diff($currentRoles->toArray(), ["sdm"]))) {
-            $filtered_travels = $travels->filter(function ($item) {
-                return $item->div_sdm_id == auth()->user()->id;
-            })->values();
-        } else if (empty(array_diff($currentRoles->toArray(), ["pegawai"]))) {
-            $filtered_travels = $travels->filter(function ($item) {
-                return $item->pegawai_id == auth()->user()->id;
-            })->values();
-        }
-
-        return view("travels.index", compact("filtered_travels"));
+        return view("travels.index", ["filtered_travels" => $travels]);
     }
 
     /**
