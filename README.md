@@ -1,14 +1,10 @@
 ## Tentang Author
 
----
-
 | Nama | Email |
 | ----------- | ----------- |
 | Rizky Ramadhan | jmiryas@gmail.com |
 
 ## Tentang Aplikasi
-
----
 
 Aplikasi ini dibuat untuk memenuhi Test Programming Akhdani dengan test case perjalanan dinas. Berikut adalah teknologi yang digunakan beserta versinya.
 
@@ -20,8 +16,6 @@ Aplikasi ini dibuat untuk memenuhi Test Programming Akhdani dengan test case per
 | Sistem Operasi | Xubuntu 22.04.3 LTS |
 
 ## Fitur
-
----
 
 1. Login & Role
 2. Admin
