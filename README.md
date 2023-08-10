@@ -26,10 +26,10 @@ Aplikasi ini dibuat untuk memenuhi Test Programming Akhdani dengan test case per
 1. Login & Role
 2. Admin
    - Manajemen Master Data
-     - [x] Bisa melihat seluruh negara ✔️
-     - [x] Bisa melihat seluruh pulau ✔️
-     - [x] Bisa melihat seluruh provinsi ✔️
-     - [x] Bisa melihat seluruh kota ✔️
+     - [x] Bisa melihat seluruh negara ✅
+     - [x] Bisa melihat seluruh pulau ✅
+     - [x] Bisa melihat seluruh provinsi ✅
+     - [x] Bisa melihat seluruh kota ✅
    - Manajemen User
      - [x] Bisa melihat seluruh user ✔️
      - [x] Bisa membuat user ✔️
