@@ -6,7 +6,7 @@
 
 ## Tentang Aplikasi
 
-Aplikasi ini dibuat untuk memenuhi Test Programming Akhdani dengan test case perjalanan dinas. Berikut adalah teknologi yang digunakan beserta versinya.
+Aplikasi perjalanan dinas. Berikut adalah teknologi yang digunakan beserta versinya.
 
 | # |  |
 | ----------- | ----------- |
